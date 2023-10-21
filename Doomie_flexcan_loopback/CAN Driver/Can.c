@@ -385,7 +385,16 @@ static flexcan_isr_t s_flexcanIsr;
 /*******************************************************************************
  * Code
  ******************************************************************************/
+
+//SWS_Can_91002: Este fue el primer requisito a implementar - This function de-initializes the module.
+void Can_DeInit (void)
+{
+	//To do... Conocimiento aún no adquirido
+}
+
 /*!
+ *
+ *
  * brief Get the FlexCAN instance from peripheral base address.
  *
  * param base FlexCAN peripheral base address.

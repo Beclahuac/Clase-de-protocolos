@@ -1035,6 +1035,15 @@ extern "C" {
  */
 
 /*!
+ * @brief Vuelve a poner el controlador en su estado default
+ *
+ * SWS_Can_91002
+ *
+ * @param void está función no necesita ningún parámetro
+ */
+void Can_DeInit (void);
+
+/*!
  * @brief Enter FlexCAN Freeze Mode.
  *
  * This function makes the FlexCAN work under Freeze Mode.
