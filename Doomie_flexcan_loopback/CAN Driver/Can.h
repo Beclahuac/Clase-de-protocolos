@@ -270,14 +270,7 @@ enum
 #endif
 };
 
-/*! @brief This is the type of the external data structure containing the overall initialization data
- * for the CAN driver and SFR settings affecting all controllers. Furthermore it contains pointers to controller
- * configuration structures. The contents of the initialization data structure are CAN hardware specific.
- * SWS_Can_00413 */
-typedef struct EstructuraBeto //To do...Cambiar este nombre
-{
-	char doomie; //To do.... Mucho ojo aquí, cosas que me ayuden a inicializar el controlador de CAN
-}Can_ConfigType;
+
 
 /*! @brief FlexCAN frame format. */
 typedef enum _flexcan_frame_format
@@ -794,6 +787,18 @@ typedef struct _flexcan_config
     flexcan_timing_config_t timingConfig; /* Protocol timing . */
 } flexcan_config_t;
 
+/*! @brief This is the type of the external data structure containing the overall initialization data
+ * for the CAN driver and SFR settings affecting all controllers. Furthermore it contains pointers to controller
+ * configuration structures. The contents of the initialization data structure are CAN hardware specific.
+ * SWS_Can_00413 */
+typedef struct EstructuraBeto //To do...Cambiar este nombre
+{
+	 CAN_Type *base;
+	 const flexcan_config_t *pConfig;
+	 uint32_t sourceClock_Hz;
+
+}Can_ConfigType;
+
 /*!
  * @brief FlexCAN Receive Message Buffer configuration structure
  *
@@ -1106,32 +1111,6 @@ bool FLEXCAN_CalculateImprovedTimingValues(CAN_Type *base,
                                            uint32_t sourceClock_Hz,
                                            flexcan_timing_config_t *pTimingConfig);
 
-/*!
- * @brief Initializes a FlexCAN instance.
- *
- * This function initializes the FlexCAN module with user-defined settings.
- * This example shows how to set up the flexcan_config_t parameters and how
- * to call the FLEXCAN_Init function by passing in these parameters.
- *  @code
- *   flexcan_config_t flexcanConfig;
- *   flexcanConfig.clkSrc               = kFLEXCAN_ClkSrc0;
- *   flexcanConfig.bitRate              = 1000000U;
- *   flexcanConfig.maxMbNum             = 16;
- *   flexcanConfig.enableLoopBack       = false;
- *   flexcanConfig.enableSelfWakeup     = false;
- *   flexcanConfig.enableIndividMask    = false;
- *   flexcanConfig.enableDoze           = false;
- *   flexcanConfig.disableSelfReception = false;
- *   flexcanConfig.enableListenOnlyMode = false;
- *   flexcanConfig.timingConfig         = timingConfig;
- *   FLEXCAN_Init(CAN0, &flexcanConfig, 40000000UL);
- *   @endcode
- *
- * @param base FlexCAN peripheral base address.
- * @param pConfig Pointer to the user-defined configuration structure.
- * @param sourceClock_Hz FlexCAN Protocol Engine clock source frequency in Hz.
- */
-void FLEXCAN_Init(CAN_Type *base, const flexcan_config_t *pConfig, uint32_t sourceClock_Hz);
 
 #if (defined(FSL_FEATURE_FLEXCAN_HAS_FLEXIBLE_DATA_RATE) && FSL_FEATURE_FLEXCAN_HAS_FLEXIBLE_DATA_RATE)
 /*!
