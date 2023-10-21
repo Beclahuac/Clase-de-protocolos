@@ -270,6 +270,15 @@ enum
 #endif
 };
 
+/*! @brief This is the type of the external data structure containing the overall initialization data
+ * for the CAN driver and SFR settings affecting all controllers. Furthermore it contains pointers to controller
+ * configuration structures. The contents of the initialization data structure are CAN hardware specific.
+ * SWS_Can_00413 */
+typedef struct EstructuraBeto //To do...Cambiar este nombre
+{
+	char doomie; //To do.... Mucho ojo aquí, cosas que me ayuden a inicializar el controlador de CAN
+}Can_ConfigType;
+
 /*! @brief FlexCAN frame format. */
 typedef enum _flexcan_frame_format
 {
@@ -1033,6 +1042,15 @@ extern "C" {
  * @name Initialization and deinitialization
  * @{
  */
+
+/*!
+ * @brief Inicializa Init
+ *
+ * SWS_Can_00223
+ *
+ * @param Config apuntador a la memoria del controlador de CAN
+ */
+void Can_Init(const Can_ConfigType* Config);
 
 /*!
  * @brief Vuelve a poner el controlador en su estado default

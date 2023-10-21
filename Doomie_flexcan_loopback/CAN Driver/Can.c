@@ -386,11 +386,21 @@ static flexcan_isr_t s_flexcanIsr;
  * Code
  ******************************************************************************/
 
+//SWS_Can_00223 - Inicializa el Can_Init
+void Can_Init(const Can_ConfigType* Config)
+{
+	/*To do... SWS_Can_00250 The function Can_Init shall initialize:
+	static variables, including flags,
+	Common setting for the complete CAN HW unit
+	CAN controller specific settings for each CAN controller*/
+}
+
 //SWS_Can_91002: Este fue el primer requisito a implementar - This function de-initializes the module.
 void Can_DeInit (void)
 {
 	//To do... Conocimiento aún no adquirido
 }
+
 
 /*!
  *
